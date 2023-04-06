@@ -54,7 +54,8 @@ const handleOperator = (inputOperator) => {
 
     updateDisplay();
   } else {
-    throw new Error(`Sorry, please start over`);
+    alert("Sorry, please start over");
+    handleClearAll();
   }
 };
 
