@@ -34,49 +34,33 @@ const handleNumpad = (num) => {
   if (currentNumber.length === 0 && num === "0") {
     return;
   }
-  currentNumber += num;
 
-  console.log(leftValue);
-  console.log(operator);
-  console.log(currentNumber);
+  currentNumber += num;
 
   updateDisplay();
 };
 
 // 演算子の処理
-const handleOperator = (operator) => {
-  if (operator === "=" && leftValue && currentNumber) {
-    console.log("qqq");
-
-    leftValue = calc();
-
-    updateDisplay();
-  } else if (operator !== "=" && !leftValue) {
-    console.log("yyy");
-
-    leftValue = parseFloat(currentNumber);
+const handleOperator = (inputOperator) => {
+  if (inputOperator === "=" && leftValue && currentNumber) {
+    leftValue = calc(operator);
     currentNumber = "";
 
     updateDisplay();
+  } else if (inputOperator !== "=" && !leftValue) {
+    leftValue = parseFloat(currentNumber);
+    currentNumber = "";
+    operator = inputOperator;
 
-    console.log(leftValue);
-    console.log(operator);
-    console.log(currentNumber);
+    updateDisplay();
   } else {
     throw new Error(`Sorry, please start over`);
   }
-
-  // 左辺に対するオペレーターを保存
-  operator = operator === "=" ? null : operator;
-  currentNumber = "";
-  updateDisplay();
 };
 
 // 計算処理
-const calc = () => {
+const calc = (operator) => {
   const rightValue = parseFloat(currentNumber);
-  // console.log(rightValue);
-  // console.log(leftValue);
 
   switch (operator) {
     case "+":
@@ -97,7 +81,6 @@ const handleClearAll = () => {
   currentNumber = "";
   operator = null;
   leftValue = null;
-  // console.log("handleClearAll");
 
   updateDisplay();
 };
@@ -106,6 +89,4 @@ const handleClearAll = () => {
 const updateDisplay = () => {
   displayElement = currentNumber || leftValue || "0";
   document.getElementById("display").innerText = displayElement;
-
-  // console.log(displayElement);
 };
