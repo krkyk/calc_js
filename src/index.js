@@ -35,8 +35,6 @@ const handleNumpad = (num) => {
     return;
   }
   currentNumber += num;
-  // console.log("handleNumpad");
-  // console.log(currentNumber);
 
   console.log(leftValue);
   console.log(operator);
@@ -50,23 +48,22 @@ const handleOperator = (operator) => {
   if (operator === "=" && leftValue && currentNumber) {
     console.log("qqq");
 
-    const ret = calc();
-    leftValue = ret;
+    leftValue = calc();
+
     updateDisplay();
-  } else if (operator && operator !== "=" && currentNumber && !leftValue) {
+  } else if (operator !== "=" && !leftValue) {
     console.log("yyy");
 
-    leftValue = currentNumber;
+    leftValue = parseFloat(currentNumber);
     currentNumber = "";
+
     updateDisplay();
 
     console.log(leftValue);
     console.log(operator);
     console.log(currentNumber);
-  } else if ((!operator && leftValue) || currentNumber) {
-    console.log("lll");
-
-    leftValue = leftValue || parseFloat(currentNumber);
+  } else {
+    throw new Error(`Sorry, please start over`);
   }
 
   // 左辺に対するオペレーターを保存

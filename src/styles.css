@@ -43,15 +43,3 @@ button {
   border: none;
   border-radius: 5px;
 }
-
-.ac {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-items: center;
-  align-items: center;
-}
-
-.ac > button {
-  width: 93%;
-}
